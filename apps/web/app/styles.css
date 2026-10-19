@@ -1,0 +1,396 @@
+:root {
+  --font-sans:
+    ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.auth-shell {
+  --auth-ground: #fff;
+  --auth-ink: #191b16;
+  --auth-muted: #60645c;
+  --auth-border: #aeb5a5;
+  --auth-lime: #b9ef46;
+  --auth-focus: #436a0e;
+  --auth-error: #b22d26;
+  --auth-button: #191b16;
+  --auth-button-text: #fff;
+  display: grid;
+  grid-template-columns: 43.05% minmax(0, 1fr);
+  min-height: 100svh;
+  color: var(--auth-ink);
+  background: var(--auth-ground);
+  scrollbar-color: var(--auth-border) var(--auth-ground);
+}
+
+.dark .auth-shell {
+  --auth-ground: #1b1f18;
+  --auth-ink: #f2f4ed;
+  --auth-muted: #b3baac;
+  --auth-border: #69735e;
+  --auth-focus: #b9ef46;
+  --auth-error: #ffb4a8;
+  --auth-button: #b9ef46;
+  --auth-button-text: #191b16;
+}
+
+.auth-shell ::selection {
+  color: #191b16;
+  background: #b9ef46;
+}
+.auth-shell button {
+  cursor: pointer;
+}
+.auth-shell button:focus-visible {
+  outline: 2px solid var(--auth-focus);
+  outline-offset: 4px;
+}
+.auth-brand {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 58px clamp(32px, 4.45vw, 72px) 48px;
+  background: var(--auth-lime);
+  color: #191b16;
+}
+.auth-wordmark {
+  margin: 0;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+.auth-introduction {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 64px 90px;
+}
+.auth-statement {
+  margin: 0;
+  font-size: clamp(36px, 3.62vw, 58px);
+  line-height: 1.48;
+  letter-spacing: -0.025em;
+  font-weight: 550;
+  text-wrap: balance;
+}
+.auth-description {
+  margin: 26px 0 0;
+  color: #36451d;
+  font-size: 18px;
+  line-height: 30px;
+}
+.auth-disclaimer {
+  margin: 0;
+  color: #36451d;
+  font-size: 13px;
+  line-height: 20px;
+}
+.auth-access {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 64px 40px;
+}
+.auth-content {
+  width: 100%;
+  max-width: 400px;
+}
+.auth-content h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.auth-instruction {
+  margin: 12px 0 36px;
+  color: var(--auth-muted);
+  font-size: 15px;
+  line-height: 24px;
+}
+.auth-field {
+  --auth-field-accent: var(--auth-focus);
+}
+.auth-field:has(input[aria-invalid="true"]) {
+  --auth-field-accent: var(--auth-error);
+}
+.auth-field + .auth-field {
+  margin-top: 24px;
+}
+.auth-field label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 22px;
+}
+.auth-field label::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 12px;
+  margin-left: 8px;
+  background: var(--auth-field-accent);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
+  opacity: 0;
+  transform: translateY(-3px);
+  transition:
+    opacity 140ms ease-out,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.auth-field:focus-within label::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+.auth-control {
+  position: relative;
+}
+.auth-control::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: var(--auth-field-accent);
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.auth-control:focus-within::after {
+  transform: scaleX(1);
+}
+.auth-field input {
+  display: block;
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  border: 1px solid var(--auth-border);
+  border-radius: 0;
+  color: var(--auth-ink);
+  background: var(--auth-ground);
+  font: inherit;
+  font-size: 16px;
+  caret-color: var(--auth-focus);
+  transition: border-color 140ms ease-out;
+}
+.auth-field input::placeholder {
+  color: var(--auth-muted);
+  opacity: 1;
+}
+.auth-field input:focus {
+  outline: 2px solid var(--auth-field-accent);
+  outline-offset: 2px;
+  border-color: var(--auth-field-accent);
+}
+.auth-field input[aria-invalid="true"] {
+  border-color: var(--auth-error);
+}
+.auth-field input[readonly] {
+  opacity: 0.7;
+}
+.auth-password input {
+  padding-right: 58px;
+}
+.auth-visibility {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  color: var(--auth-muted);
+  background: transparent;
+  transition:
+    background-color 140ms ease-out,
+    color 140ms ease-out;
+}
+.auth-visibility:hover {
+  color: var(--auth-ink);
+}
+.auth-visibility[aria-pressed="true"] {
+  color: #191b16;
+  background: var(--auth-lime);
+}
+.auth-feedback {
+  height: 48px;
+  margin: 10px 0 8px;
+  color: var(--auth-error);
+  font-size: 14px;
+  line-height: 24px;
+  overflow-wrap: anywhere;
+  overflow-y: auto;
+}
+.auth-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 0;
+  background: var(--auth-button);
+  color: var(--auth-button-text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  transition: opacity 140ms ease-out;
+}
+.auth-submit:hover {
+  opacity: 0.86;
+}
+.auth-submit:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+.auth-login-submit {
+  position: relative;
+  padding-inline: 64px;
+}
+.auth-login-submit:hover:not(:disabled) {
+  opacity: 1;
+}
+.auth-submit-indicator {
+  position: absolute;
+  inset: 6px 6px 6px auto;
+  display: grid;
+  width: 42px;
+  place-items: center;
+  color: #191b16;
+  background: var(--auth-lime);
+}
+.dark .auth-submit-indicator {
+  color: var(--auth-lime);
+  background: #191b16;
+}
+.auth-submit-arrow {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.auth-login-submit:focus-visible .auth-submit-arrow {
+  transform: translateX(3px);
+}
+@media (hover: hover) {
+  .auth-login-submit:hover:not(:disabled) .auth-submit-arrow {
+    transform: translateX(3px);
+  }
+}
+.auth-help {
+  margin: 18px 0 0;
+  color: var(--auth-muted);
+  text-align: center;
+  font-size: 13px;
+  line-height: 22px;
+}
+.auth-invitation {
+  margin: 24px 0 0;
+  color: var(--auth-muted);
+  text-align: center;
+  font-size: 13px;
+  line-height: 22px;
+}
+.auth-spinner {
+  animation: auth-spin 850ms linear infinite;
+}
+.auth-account-details {
+  margin: 0;
+}
+.auth-account-details > div {
+  padding-block: 16px;
+  border-bottom: 1px solid var(--auth-border);
+}
+.auth-account-details dt {
+  color: var(--auth-muted);
+  font-size: 14px;
+}
+.auth-account-details dd {
+  margin: 6px 0 0;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.auth-account-note {
+  margin-top: 24px;
+  color: var(--auth-muted);
+  font-size: 15px;
+  line-height: 26px;
+}
+
+@keyframes auth-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .auth-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+  .auth-brand {
+    padding: 28px 24px;
+  }
+  .auth-wordmark {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .auth-introduction {
+    padding-block: 26px 0;
+  }
+  .auth-statement {
+    font-size: 28px;
+    line-height: 1.5;
+  }
+  .auth-statement br {
+    display: none;
+  }
+  .auth-description {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .auth-disclaimer {
+    margin-top: 18px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  .auth-access {
+    align-items: flex-start;
+    padding: 40px 24px 48px;
+  }
+  .auth-content h1 {
+    font-size: 28px;
+    line-height: 38px;
+  }
+  .auth-instruction {
+    margin-bottom: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-spinner {
+    animation: none;
+  }
+  .auth-submit,
+  .auth-field input,
+  .auth-field label::after,
+  .auth-control::after,
+  .auth-visibility,
+  .auth-submit-arrow {
+    transition: none;
+  }
+  .auth-field label::after,
+  .auth-login-submit:focus-visible .auth-submit-arrow,
+  .auth-login-submit:hover:not(:disabled) .auth-submit-arrow {
+    transform: none;
+  }
+}

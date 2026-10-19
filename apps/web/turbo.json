@@ -1,5 +1,14 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "extends": ["//"],
-  "tags": ["layer-app"]
+  "tags": ["layer-app"],
+  "tasks": {
+    "build": {
+      "env": ["NEXT_PUBLIC_API_ORIGIN", "ASSETNOTE_PREVIEW", "NODE_ENV"]
+    },
+    "dev": {
+      "dependsOn": ["$TURBO_EXTENDS$", "^build"],
+      "env": ["NEXT_PUBLIC_API_ORIGIN", "ASSETNOTE_PREVIEW", "NODE_ENV"]
+    }
+  }
 }

@@ -1,0 +1,37 @@
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "arial",
+        "files": [".impeccable/mocks/decision/rail.html"],
+        "createdAt": "2026-10-19T01:11:47.266Z",
+        "reason": "代理核对：未采用的 rail 登录候选草图，仅保留方案比较记录，不是正式应用界面。"
+      },
+      {
+        "rule": "overused-font",
+        "value": "arial",
+        "files": [".impeccable/mocks/decision/rail.html"],
+        "createdAt": "2026-10-19T01:12:01.643Z",
+        "reason": "代理核对：未采用的 rail 登录候选草图，仅保留方案比较记录，不是正式应用界面。"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "inter",
+        "files": [".impeccable/mocks/decision/center.html"],
+        "createdAt": "2026-10-19T01:12:02.191Z",
+        "reason": "代理核对：未采用的 center 登录候选草图，仅保留方案比较记录，不是正式应用界面。"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [".impeccable/mocks/decision/center.html"],
+        "createdAt": "2026-10-19T01:12:02.724Z",
+        "reason": "代理核对：未采用的 center 登录候选草图，仅保留方案比较记录，不是正式应用界面。"
+      }
+    ]
+  }
+}

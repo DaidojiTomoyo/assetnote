@@ -1,15 +1,13 @@
-import { Geist_Mono, Inter } from "next/font/google"
+import type { Metadata } from "next"
 
 import "@workspace/ui/globals.css"
+import "./styles.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@workspace/ui/lib/utils"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
-
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-})
+export const metadata: Metadata = {
+  title: { default: "AssetNote", template: "%s · AssetNote" },
+  description: "个人持仓记录与行情查看。",
+}
 
 export default function RootLayout({
   children,
@@ -17,16 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn(
-        "antialiased",
-        fontMono.variable,
-        "font-sans",
-        inter.variable
-      )}
-    >
+    <html lang="zh-CN" suppressHydrationWarning className="antialiased">
       <body>
         <ThemeProvider>{children}</ThemeProvider>
       </body>

@@ -23,7 +23,7 @@
       "dependsOn": ["$TURBO_EXTENDS$", "prisma:generate"]
     },
     "dev": {
-      "dependsOn": ["$TURBO_EXTENDS$", "prisma:generate"]
+      "dependsOn": ["$TURBO_EXTENDS$", "^build", "prisma:generate"]
     }
   }
 }

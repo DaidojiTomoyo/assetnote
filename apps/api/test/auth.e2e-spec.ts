@@ -2,6 +2,7 @@ import { HttpStatus, type INestApplication } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import type { App } from 'supertest/types';
+import { authSessionSchema } from '@workspace/contracts/auth';
 
 import { AppModule } from '../src/app.module';
 import { configureHttpApplication } from '../src/common/bootstrap/configure-http-application';
@@ -124,6 +125,7 @@ describe('AuthController (e2e)', () => {
       password: '  exact password  ',
     });
     expect(response.text).not.toContain(RAW_SESSION_TOKEN);
+    expect(authSessionSchema.safeParse(response.body).success).toBe(true);
 
     const setCookieHeaders = response.headers['set-cookie'];
 
@@ -191,6 +193,23 @@ describe('AuthController (e2e)', () => {
 
     expect(executeLogin).not.toHaveBeenCalled();
   });
+
+  it.each([
+    { email: 'user@example.com', password: '' },
+    { email: 'user@example.com', password: 'x'.repeat(1025) },
+    { email: 'user@example.com', password: 'secret', role: 'SUPER_ADMIN' },
+  ])(
+    'rejects invalid shared-contract input before authentication: %p',
+    async (input) => {
+      await request(app.getHttpServer())
+        .post('/api/auth/login')
+        .set('Origin', TEST_APPLICATION_CONFIG.webOrigin)
+        .send(input)
+        .expect(HttpStatus.BAD_REQUEST);
+
+      expect(executeLogin).not.toHaveBeenCalled();
+    },
+  );
 
   it('rejects login requests outside the configured Web origin', async () => {
     await request(app.getHttpServer())

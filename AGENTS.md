@@ -17,13 +17,13 @@
 - `packages/typescript-config`: shared TypeScript configuration.
 - `docs/architecture`: durable architecture decisions and system documentation.
 
-Conditional future boundaries are documented before implementation: `packages/contracts` will be created with the first real client/API transport contract, and the API will own the planned `market-data` integration. Do not create empty workspaces merely because their boundary has been reserved.
+`packages/contracts` owns the shared runtime HTTP schemas used by Web and API authentication. The API will own the planned `market-data` integration. Do not create empty workspaces merely because their boundary has been reserved.
 
 ## Non-negotiable boundaries
 
 - Applications may depend on packages; packages must never depend on applications.
 - An application must never import another application or reach into another workspace's `src` directory.
-- Client/API communication crosses an explicit HTTP boundary. Shared transport schemas and types belong in `packages/contracts` when that package is introduced, never in one application for another application to import.
+- Client/API communication crosses an explicit HTTP boundary. Shared transport schemas and types belong in `packages/contracts`, never in one application for another application to import.
 - Consume other workspaces through their public entrypoints. Runtime/library packages use declared package exports; tooling packages use their documented configuration entrypoints.
 - `apps/api` owns product business invariants and persistent data access. `apps/web` and `apps/mobile` own presentation, interaction, and platform-specific orchestration for their delivery environments.
 - `@workspace/ui` is Web-only. `apps/mobile` must not depend on it or treat DOM components and CSS as a cross-platform UI boundary.

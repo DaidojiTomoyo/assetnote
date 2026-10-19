@@ -15,6 +15,12 @@ import {
 import type { ConfigType } from '@nestjs/config';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import type { Request, Response } from 'express';
+import {
+  authSessionSchema,
+  type AuthSession,
+  type AuthRole,
+  type LoginRequest,
+} from '@workspace/contracts/auth';
 
 import applicationConfig from '../../../common/config/application.config';
 import type { UserRole } from '../../users';
@@ -22,11 +28,7 @@ import { InvalidCredentialsError } from '../application/invalid-credentials.erro
 import { type LoginResult, LoginService } from '../application/login.service';
 import { LogoutService } from '../application/logout.service';
 import type { AuthenticatedRequest } from './authenticated-request';
-import type {
-  AuthSessionResponseDto,
-  AuthSessionResponseRole,
-} from './auth-session-response.dto';
-import { LoginRequestDto } from './login.dto';
+import { LoginRequestPipe } from './login-request.pipe';
 import { SessionAuthenticationGuard } from './session-authentication.guard';
 import {
   createSessionCookieOptions,
@@ -43,7 +45,7 @@ interface AuthSessionResponseInput {
   readonly expiresAt: Date;
 }
 
-function mapAuthSessionResponseRole(role: UserRole): AuthSessionResponseRole {
+function mapAuthSessionResponseRole(role: UserRole): AuthRole {
   switch (role) {
     case 'SUPER_ADMIN':
       return 'SUPER_ADMIN';
@@ -54,17 +56,15 @@ function mapAuthSessionResponseRole(role: UserRole): AuthSessionResponseRole {
   }
 }
 
-function mapAuthSessionResponse(
-  result: AuthSessionResponseInput,
-): AuthSessionResponseDto {
-  return {
+function mapAuthSessionResponse(result: AuthSessionResponseInput): AuthSession {
+  return authSessionSchema.parse({
     user: {
       id: result.user.id,
       email: result.user.email,
       role: mapAuthSessionResponseRole(result.user.role),
     },
     expiresAt: result.expiresAt.toISOString(),
-  };
+  });
 }
 
 @Controller('auth')
@@ -82,9 +82,9 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(WebOriginGuard, ThrottlerGuard)
   async login(
-    @Body() input: LoginRequestDto,
+    @Body(new LoginRequestPipe()) input: LoginRequest,
     @Res({ passthrough: true }) response: Response,
-  ): Promise<AuthSessionResponseDto> {
+  ): Promise<AuthSession> {
     let result: LoginResult;
 
     try {
@@ -113,7 +113,7 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(SessionAuthenticationGuard)
-  getCurrentUser(@Req() request: AuthenticatedRequest): AuthSessionResponseDto {
+  getCurrentUser(@Req() request: AuthenticatedRequest): AuthSession {
     return mapAuthSessionResponse(request.authSession);
   }
 

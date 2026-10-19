@@ -1,0 +1,9 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tags": ["layer-package"],
+  "tasks": {
+    "lint": { "dependsOn": ["$TURBO_EXTENDS$", "build"] },
+    "typecheck": { "dependsOn": ["$TURBO_EXTENDS$", "build"] }
+  }
+}

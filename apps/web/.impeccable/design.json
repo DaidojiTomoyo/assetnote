@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T01:10:13.361394+00:00",
+  "title": "Design System: AssetNote Web",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "共享青柠",
+        "tonalRamp": [
+          "oklch(0.150 0.2380 128.850)",
+          "oklch(0.264 0.2380 128.850)",
+          "oklch(0.379 0.2380 128.850)",
+          "oklch(0.493 0.2380 128.850)",
+          "oklch(0.607 0.2380 128.850)",
+          "oklch(0.721 0.2380 128.850)",
+          "oklch(0.836 0.2380 128.850)",
+          "oklch(0.950 0.2380 128.850)"
+        ]
+      },
+      "primary-dark": {
+        "role": "primary",
+        "displayName": "共享深色青柠",
+        "tonalRamp": [
+          "oklch(0.150 0.2330 130.850)",
+          "oklch(0.264 0.2330 130.850)",
+          "oklch(0.379 0.2330 130.850)",
+          "oklch(0.493 0.2330 130.850)",
+          "oklch(0.607 0.2330 130.850)",
+          "oklch(0.721 0.2330 130.850)",
+          "oklch(0.836 0.2330 130.850)",
+          "oklch(0.950 0.2330 130.850)"
+        ]
+      },
+      "auth-lime": {
+        "role": "primary",
+        "displayName": "认证青柠",
+        "tonalRamp": [
+          "oklch(0.150 0.1984 125.818)",
+          "oklch(0.264 0.1984 125.818)",
+          "oklch(0.379 0.1984 125.818)",
+          "oklch(0.493 0.1984 125.818)",
+          "oklch(0.607 0.1984 125.818)",
+          "oklch(0.721 0.1984 125.818)",
+          "oklch(0.836 0.1984 125.818)",
+          "oklch(0.950 0.1984 125.818)"
+        ]
+      },
+      "auth-ground": {
+        "role": "neutral",
+        "displayName": "纸白",
+        "tonalRamp": [
+          "oklch(0.150 0.0000 0.000)",
+          "oklch(0.264 0.0000 0.000)",
+          "oklch(0.379 0.0000 0.000)",
+          "oklch(0.493 0.0000 0.000)",
+          "oklch(0.607 0.0000 0.000)",
+          "oklch(0.721 0.0000 0.000)",
+          "oklch(0.836 0.0000 0.000)",
+          "oklch(0.950 0.0000 0.000)"
+        ]
+      },
+      "auth-ink": {
+        "role": "neutral",
+        "displayName": "墨黑",
+        "tonalRamp": [
+          "oklch(0.150 0.0100 125.012)",
+          "oklch(0.264 0.0100 125.012)",
+          "oklch(0.379 0.0100 125.012)",
+          "oklch(0.493 0.0100 125.012)",
+          "oklch(0.607 0.0100 125.012)",
+          "oklch(0.721 0.0100 125.012)",
+          "oklch(0.836 0.0100 125.012)",
+          "oklch(0.950 0.0100 125.012)"
+        ]
+      },
+      "auth-muted": {
+        "role": "neutral",
+        "displayName": "灰绿说明",
+        "tonalRamp": [
+          "oklch(0.150 0.0134 128.764)",
+          "oklch(0.264 0.0134 128.764)",
+          "oklch(0.379 0.0134 128.764)",
+          "oklch(0.493 0.0134 128.764)",
+          "oklch(0.607 0.0134 128.764)",
+          "oklch(0.721 0.0134 128.764)",
+          "oklch(0.836 0.0134 128.764)",
+          "oklch(0.950 0.0134 128.764)"
+        ]
+      },
+      "auth-border": {
+        "role": "neutral",
+        "displayName": "灰绿边框",
+        "tonalRamp": [
+          "oklch(0.150 0.0237 126.327)",
+          "oklch(0.264 0.0237 126.327)",
+          "oklch(0.379 0.0237 126.327)",
+          "oklch(0.493 0.0237 126.327)",
+          "oklch(0.607 0.0237 126.327)",
+          "oklch(0.721 0.0237 126.327)",
+          "oklch(0.836 0.0237 126.327)",
+          "oklch(0.950 0.0237 126.327)"
+        ]
+      },
+      "auth-focus": {
+        "role": "neutral",
+        "displayName": "深绿焦点",
+        "tonalRamp": [
+          "oklch(0.150 0.1234 131.044)",
+          "oklch(0.264 0.1234 131.044)",
+          "oklch(0.379 0.1234 131.044)",
+          "oklch(0.493 0.1234 131.044)",
+          "oklch(0.607 0.1234 131.044)",
+          "oklch(0.721 0.1234 131.044)",
+          "oklch(0.836 0.1234 131.044)",
+          "oklch(0.950 0.1234 131.044)"
+        ]
+      },
+      "auth-error": {
+        "role": "error",
+        "displayName": "错误红",
+        "tonalRamp": [
+          "oklch(0.150 0.1709 28.039)",
+          "oklch(0.264 0.1709 28.039)",
+          "oklch(0.379 0.1709 28.039)",
+          "oklch(0.493 0.1709 28.039)",
+          "oklch(0.607 0.1709 28.039)",
+          "oklch(0.721 0.1709 28.039)",
+          "oklch(0.836 0.1709 28.039)",
+          "oklch(0.950 0.1709 28.039)"
+        ]
+      },
+      "auth-brand-copy": {
+        "role": "neutral",
+        "displayName": "品牌深绿",
+        "tonalRamp": [
+          "oklch(0.150 0.0649 126.404)",
+          "oklch(0.264 0.0649 126.404)",
+          "oklch(0.379 0.0649 126.404)",
+          "oklch(0.493 0.0649 126.404)",
+          "oklch(0.607 0.0649 126.404)",
+          "oklch(0.721 0.0649 126.404)",
+          "oklch(0.836 0.0649 126.404)",
+          "oklch(0.950 0.0649 126.404)"
+        ]
+      },
+      "auth-ground-dark": {
+        "role": "neutral",
+        "displayName": "深色背景",
+        "tonalRamp": [
+          "oklch(0.150 0.0144 131.819)",
+          "oklch(0.264 0.0144 131.819)",
+          "oklch(0.379 0.0144 131.819)",
+          "oklch(0.493 0.0144 131.819)",
+          "oklch(0.607 0.0144 131.819)",
+          "oklch(0.721 0.0144 131.819)",
+          "oklch(0.836 0.0144 131.819)",
+          "oklch(0.950 0.0144 131.819)"
+        ]
+      },
+      "auth-ink-dark": {
+        "role": "neutral",
+        "displayName": "深色文字",
+        "tonalRamp": [
+          "oklch(0.150 0.0095 119.578)",
+          "oklch(0.264 0.0095 119.578)",
+          "oklch(0.379 0.0095 119.578)",
+          "oklch(0.493 0.0095 119.578)",
+          "oklch(0.607 0.0095 119.578)",
+          "oklch(0.721 0.0095 119.578)",
+          "oklch(0.836 0.0095 119.578)",
+          "oklch(0.950 0.0095 119.578)"
+        ]
+      },
+      "auth-muted-dark": {
+        "role": "neutral",
+        "displayName": "深色说明",
+        "tonalRamp": [
+          "oklch(0.150 0.0210 128.764)",
+          "oklch(0.264 0.0210 128.764)",
+          "oklch(0.379 0.0210 128.764)",
+          "oklch(0.493 0.0210 128.764)",
+          "oklch(0.607 0.0210 128.764)",
+          "oklch(0.721 0.0210 128.764)",
+          "oklch(0.836 0.0210 128.764)",
+          "oklch(0.950 0.0210 128.764)"
+        ]
+      },
+      "auth-border-dark": {
+        "role": "neutral",
+        "displayName": "深色边框",
+        "tonalRamp": [
+          "oklch(0.150 0.0340 128.275)",
+          "oklch(0.264 0.0340 128.275)",
+          "oklch(0.379 0.0340 128.275)",
+          "oklch(0.493 0.0340 128.275)",
+          "oklch(0.607 0.0340 128.275)",
+          "oklch(0.721 0.0340 128.275)",
+          "oklch(0.836 0.0340 128.275)",
+          "oklch(0.950 0.0340 128.275)"
+        ]
+      },
+      "auth-error-dark": {
+        "role": "error",
+        "displayName": "深色错误",
+        "tonalRamp": [
+          "oklch(0.150 0.0898 29.231)",
+          "oklch(0.264 0.0898 29.231)",
+          "oklch(0.379 0.0898 29.231)",
+          "oklch(0.493 0.0898 29.231)",
+          "oklch(0.607 0.0898 29.231)",
+          "oklch(0.721 0.0898 29.231)",
+          "oklch(0.836 0.0898 29.231)",
+          "oklch(0.950 0.0898 29.231)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "页面标题",
+        "purpose": "登录与会话确认页面标题；窄屏为 28px / 38px。"
+      },
+      "body": {
+        "displayName": "正文",
+        "purpose": "表单操作说明。"
+      },
+      "label": {
+        "displayName": "字段标签",
+        "purpose": "邮箱与密码字段标签。"
+      },
+      "helper": {
+        "displayName": "辅助说明",
+        "purpose": "邀请制说明与管理员帮助文案。"
+      }
+    },
+    "motion": [
+      {
+        "name": "auth-transition",
+        "value": "140ms ease-out",
+        "purpose": "字段边框和按钮透明度；减少动态效果时关闭。"
+      },
+      {
+        "name": "auth-spinner",
+        "value": "850ms linear infinite",
+        "purpose": "提交图标旋转；减少动态效果时关闭。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "auth-stacked",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "登录主按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "通栏主操作；支持悬停、键盘焦点和禁用状态。",
+      "html": "<button class=\"ds-submit\" type=\"button\">登录</button>",
+      "css": ".ds-submit { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; min-height:54px; padding:12px 20px; border:0; border-radius:0; background:var(--auth-button, #191b16); color:var(--auth-button-text, #fff); font-family:var(--font-sans, ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif); font-size:15px; font-weight:600; cursor:pointer; transition:opacity 140ms ease-out; } .ds-submit:hover { opacity:.86; } .ds-submit:focus-visible { outline:2px solid var(--auth-focus, #436a0e); outline-offset:4px; } .ds-submit:disabled { cursor:wait; opacity:.62; } @media (prefers-reduced-motion:reduce) { .ds-submit { transition:none; } }"
+    },
+    {
+      "name": "深色主按钮",
+      "kind": "button",
+      "refersTo": "button-primary-dark",
+      "description": "深色认证操作区的青柠主按钮。",
+      "html": "<button class=\"ds-submit ds-dark-submit\" type=\"button\">登录</button>",
+      "css": ".ds-submit { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; min-height:54px; padding:12px 20px; border:0; border-radius:0; background:var(--auth-button, #191b16); color:var(--auth-button-text, #fff); font-family:var(--font-sans, ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif); font-size:15px; font-weight:600; cursor:pointer; transition:opacity 140ms ease-out; } .ds-submit:hover { opacity:.86; } .ds-submit:focus-visible { outline:2px solid var(--auth-focus, #436a0e); outline-offset:4px; } .ds-submit:disabled { cursor:wait; opacity:.62; } @media (prefers-reduced-motion:reduce) { .ds-submit { transition:none; } } .ds-dark-submit { --auth-button:#b9ef46; --auth-button-text:#191b16; --auth-focus:#b9ef46; }"
+    },
+    {
+      "name": "邮箱输入",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "明确标签、直角细边框、可见焦点和错误语义。",
+      "html": "<label class=\"ds-label\" for=\"ds-email\">邮箱</label><input class=\"ds-input\" id=\"ds-email\" type=\"email\" autocomplete=\"username\" placeholder=\"name@example.com\" aria-invalid=\"false\"/>",
+      "css": ".ds-label { display:block; margin-bottom:10px; font-family:var(--font-sans, ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif); font-size:14px; font-weight:550; line-height:22px; color:var(--auth-ink, #191b16); } .ds-input { display:block; width:100%; height:54px; padding:0 16px; border:1px solid var(--auth-border, #aeb5a5); border-radius:0; color:var(--auth-ink, #191b16); background:var(--auth-ground, #fff); font-family:var(--font-sans, ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif); font-size:16px; caret-color:var(--auth-focus, #436a0e); transition:border-color 140ms ease-out; } .ds-input::placeholder { color:var(--auth-muted, #60645c); opacity:1; } .ds-input:focus { outline:2px solid var(--auth-focus, #436a0e); outline-offset:2px; border-color:var(--auth-focus, #436a0e); } .ds-input[aria-invalid=\"true\"] { border-color:var(--auth-error, #b22d26); } .ds-input[readonly] { opacity:.7; } @media (prefers-reduced-motion:reduce) { .ds-input { transition:none; } }"
+    },
+    {
+      "name": "密码可见性按钮",
+      "kind": "button",
+      "refersTo": "password-visibility",
+      "description": "字段内的透明图标按钮；此预览仅展示外观，图标来自 lucide-react Eye（ISC）。",
+      "html": "<button class=\"ds-visibility\" type=\"button\" aria-label=\"显示密码\" aria-pressed=\"false\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg></button>",
+      "css": ".ds-visibility { display:grid; place-items:center; width:44px; height:44px; border:0; background:transparent; color:var(--auth-muted, #60645c); cursor:pointer; } .ds-visibility:hover { color:var(--auth-ink, #191b16); } .ds-visibility:focus-visible { outline:2px solid var(--auth-focus, #436a0e); outline-offset:4px; }"
+    },
+    {
+      "name": "固定反馈区",
+      "kind": "custom",
+      "refersTo": "feedback",
+      "description": "固定高度承载表单错误，避免按钮位置随验证结果变化。预览文案为状态示例。",
+      "html": "<p class=\"ds-feedback\" role=\"alert\">请输入邮箱。</p>",
+      "css": ".ds-feedback { height:48px; margin:10px 0 8px; color:var(--auth-error, #b22d26); font-family:var(--font-sans, ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif); font-size:14px; line-height:24px; overflow-wrap:anywhere; overflow-y:auto; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "个人资产的记录与观察空间",
+    "overview": "青柠色提供清晰的品牌识别，黑白操作区与直角控件保持直接、平静的记录工具气质。当前实现服务于受邀用户的登录与会话确认；不以交易终端或营销证明包装尚未实现的资产功能。\n\n本文记录已实现的 Web 认证界面。共享基础变量来自 `packages/ui/src/styles/globals.css`，认证页局部覆盖来自 `app/styles.css`；后者没有替换共享色板。登录页分屏构图属于该页面，详见[表面说明](./.impeccable/surfaces/app-login-page-tsx.md)，不作为所有后续页面的模板。",
+    "keyCharacteristics": [
+      "青柠品牌面与中性操作区。",
+      "直角、细边框、清晰焦点。",
+      "中文表单、克制说明与稳定反馈位置。",
+      "深浅色适配和减少动态效果支持。"
+    ],
+    "rules": [
+      {
+        "name": "The Local Color Rule",
+        "body": "认证页颜色只覆盖认证容器，不改写共享组件库的颜色定义。",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do 保留认证页语义颜色的作用域以及共享组件库原有变量。",
+      "Do 保留清晰标签、键盘焦点、错误文字和稳定的反馈位置。",
+      "Do 在深色模式和减少动态效果模式下保持状态可读。"
+    ],
+    "donts": [
+      "Don't 用条件出现的可见字段错误段落推动登录按钮。",
+      "Don't 把登录页的分屏构图规定为全部业务页面的布局。",
+      "Don't 把示例资产、交易能力或未实现功能展示为真实产品证据。"
+    ]
+  }
+}

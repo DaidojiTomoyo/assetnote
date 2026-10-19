@@ -1,6 +1,7 @@
 dist/
 node_modules/
 .next/
+.next-preview/
 .expo/
 .turbo/
 coverage/
@@ -8,3 +9,10 @@ pnpm-lock.yaml
 .pnpm-store/
 expo-env.d.ts
 apps/api/src/generated/prisma/
+
+# Local Impeccable previews and generated review evidence
+**/.impeccable/hook.cache.json
+**/.impeccable/questions/
+**/.impeccable/mocks/
+**/.impeccable/review/
+**/.impeccable/build/

@@ -1,7 +1,7 @@
 # AssetNote Architecture
 
-- Status: baseline v2
-- Last updated: 2026-08-28
+- Status: baseline v3
+- Last updated: 2026-10-13
 
 ## Purpose
 
@@ -17,7 +17,7 @@ AssetNote currently contains three deployable applications:
 - `apps/api`: the NestJS backend and authority for business rules and persistent product data.
 - `apps/mobile`: the Expo and React Native application for iOS and Android.
 
-Shared packages provide reusable libraries and tooling to applications. They are not independently deployable runtimes or alternate application layers. `packages/contracts` has not been introduced yet.
+Shared packages provide reusable libraries and tooling to applications. They are not independently deployable runtimes or alternate application layers. `packages/contracts` now supplies runtime HTTP schemas for Web/API authentication.
 
 ```text
 Browser
@@ -40,13 +40,13 @@ packages/* ---------X----------> apps/*
 apps/* ------------X-----------> another app's source
 ```
 
-The HTTP arrows describe the only permitted runtime boundary between client applications and the API. They do not claim that either client already consumes an implemented API feature.
+The HTTP arrows describe the only permitted runtime boundary between client applications and the API. Web now consumes authentication over HTTP; Mobile remains an unauthenticated shell.
 
 ## Accepted next boundary
 
 The next accepted but unimplemented capability is `market-data`: an API-owned feature whose first provider adapter is planned to use `stock-sdk`.
 
-`packages/contracts` remains conditional on the first real client/API transport contract. In the target diagram, `[planned]` marks a workspace, feature, dependency, or package that does not exist yet.
+`packages/contracts` was introduced with the first Web/API authentication contract. In the target diagram, `[planned]` marks a feature or dependency that does not exist yet.
 
 ```text
 apps/api
@@ -55,7 +55,7 @@ apps/api
               `-- external market-data sources
 
 apps/web --------\
-apps/mobile ------>-------------- packages/contracts [when introduced]
+apps/mobile [future consumer] ---> packages/contracts
 apps/api --------/
 
 apps/* ------------------------> packages/*
@@ -65,21 +65,21 @@ apps/* ------------X-----------> another app's source
 
 ## Workspace ownership
 
-| Current workspace            | Owns                                                                               | Must not own                                                                   |
-| ---------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `apps/web`                   | Routes, presentation, interaction, web orchestration, API/session adapters         | Persistence, API business invariants, authorization policy, API implementation |
-| `apps/api`                   | Use cases, business rules, authorization policy, persistence, backend integrations | Client UI or delivery-framework concerns                                       |
-| `apps/mobile`                | Native routes, presentation, interaction, device integration, API/session adapters | Persistence, API business invariants, Web UI, backend integrations             |
-| `packages/ui`                | Reusable Web React/DOM primitives, CSS, and browser styling foundations            | Native UI, product workflows, API access, auth policy, domain assumptions      |
-| `packages/eslint-config`     | Shared static-analysis policy                                                      | Application behavior                                                           |
-| `packages/typescript-config` | Shared compiler defaults                                                           | Application behavior                                                           |
+| Current workspace            | Owns                                                                               | Must not own                                                                       |
+| ---------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `apps/web`                   | Routes, presentation, interaction, web orchestration, API/session adapters         | Persistence, API business invariants, authorization policy, API implementation     |
+| `apps/api`                   | Use cases, business rules, authorization policy, persistence, backend integrations | Client UI or delivery-framework concerns                                           |
+| `apps/mobile`                | Native routes, presentation, interaction, device integration, API/session adapters | Persistence, API business invariants, Web UI, backend integrations                 |
+| `packages/ui`                | Reusable Web React/DOM primitives, CSS, and browser styling foundations            | Native UI, product workflows, API access, auth policy, domain assumptions          |
+| `packages/contracts`         | Framework-independent runtime HTTP schemas and inferred transport types            | Domain entities, ORM models, API clients, credential storage, authorization policy |
+| `packages/eslint-config`     | Shared static-analysis policy                                                      | Application behavior                                                               |
+| `packages/typescript-config` | Shared compiler defaults                                                           | Application behavior                                                               |
 
 The accepted target introduces these ownership boundaries only when their implementation is created:
 
-| Planned workspace or feature       | Owns                                                                            | Must not own                                                                       |
-| ---------------------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `apps/api/src/modules/market-data` | Provider-neutral market-data use cases, policy, ports, and third-party adapters | Client rendering, vendor-shaped HTTP contracts, unrestricted upstream proxying     |
-| `packages/contracts`               | Runtime transport schemas and inferred transport types                          | Domain entities, ORM models, framework decorators, API clients, credential storage |
+| Planned workspace or feature       | Owns                                                                            | Must not own                                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `apps/api/src/modules/market-data` | Provider-neutral market-data use cases, policy, ports, and third-party adapters | Client rendering, vendor-shaped HTTP contracts, unrestricted upstream proxying |
 
 ## Architecture invariants
 
@@ -151,7 +151,7 @@ Third-party integrations remain behind application- or domain-owned ports. Their
 
 ## Authentication baseline
 
-The API now implements browser-oriented email/password authentication, but the Web application has not integrated that HTTP surface yet. The API owns identity, password verification, platform authorization, and server-side sessions; after Web integration, the Web application will only carry the session credential and present the authenticated experience.
+The API implements browser-oriented email/password authentication, and Web now consumes login, current-session and logout endpoints through its centralized HTTP client. The API owns identity, password verification, platform authorization, and server-side sessions; Web only carries the session cookie and presents the authenticated experience.
 
 - Public registration is disabled. A controlled bootstrap operation creates the first super administrator, and invitation-based account creation will be added separately.
 - Platform roles are `SUPER_ADMIN`, `ADMIN`, and `USER`. Invitation and administrative capabilities use explicit policy; future portfolio ownership or collaboration permissions remain resource-level concerns rather than additional platform roles.
@@ -168,7 +168,7 @@ The accepted Mobile boundary does not change this browser credential model. Prot
 
 ## Shared contracts
 
-`packages/contracts` does not currently exist. It is deliberately deferred until the first real client/API feature needs a shared contract. When introduced, it will:
+`packages/contracts` now exposes `@workspace/contracts/auth`, with Zod 4.4.3 runtime schemas and inferred types for login requests, session responses, roles and error responses. Its invariants are:
 
 - contain framework-independent runtime schemas and types derived from them;
 - describe transport payloads, not internal domain or persistence structures;
@@ -177,7 +177,7 @@ The accepted Mobile boundary does not change this browser credential model. Prot
 - keep API clients, credential transport, navigation, and view models in their owning applications;
 - require compatible API implementation and client consumption changes in the same pull request.
 
-The schema library and versioning policy will be recorded when the package is introduced, based on actual requirements.
+The private package remains version `0.0.0` and is not independently published. Contract changes update API and client consumption together and require end-to-end coverage. CommonJS build output plus TypeScript declarations support both existing consumers without changing their framework module settings. Mobile is not a consumer yet. See [ADR 0005](./decisions/0005-web-authentication-contract.md).
 
 ## Accepted market-data target
 
