@@ -4,6 +4,7 @@ export const AUTH_SESSION_REPOSITORY = Symbol('AUTH_SESSION_REPOSITORY');
 
 export interface CreateSessionForSuccessfulLoginInput {
   readonly userId: string;
+  readonly credentialHash: string;
   readonly tokenHash: string;
   readonly expiresAt: Date;
   readonly authenticatedAt: Date;

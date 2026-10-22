@@ -1,7 +1,7 @@
 # AssetNote Architecture
 
-- Status: baseline v3
-- Last updated: 2026-10-13
+- Status: baseline v4
+- Last updated: 2026-10-22
 
 ## Purpose
 
@@ -17,7 +17,7 @@ AssetNote currently contains three deployable applications:
 - `apps/api`: the NestJS backend and authority for business rules and persistent product data.
 - `apps/mobile`: the Expo and React Native application for iOS and Android.
 
-Shared packages provide reusable libraries and tooling to applications. They are not independently deployable runtimes or alternate application layers. `packages/contracts` now supplies runtime HTTP schemas for Web/API authentication.
+Shared packages provide reusable libraries and tooling to applications. They are not independently deployable runtimes or alternate application layers. `packages/contracts` supplies runtime HTTP schemas for Web/API authentication, personal profiles, user management and invitations.
 
 ```text
 Browser
@@ -194,6 +194,12 @@ ADR 0004 accepts an API-owned market-data integration, but neither the feature n
 See [ADR 0004: Stock market data provider boundary](./decisions/0004-stock-market-data-provider-boundary.md).
 
 ## Persistence baseline
+
+The API users feature now owns personal profiles, password changes, permission-aware
+user management and single-use invitation links. A provider module serves auth;
+`UsersHttpModule` composes users and auth for the protected HTTP surface. The Web
+settings area uses the shared accounts contracts. See [ADR 0005](./decisions/0005-account-management-and-invitations.md)
+for authorization, avatar storage, transaction and invitation lifecycle decisions.
 
 PostgreSQL is the product relational database, and Prisma ORM 7 is the API-owned persistence toolkit. Prisma configuration, schema, migrations, generated client, database lifecycle code, and persistence adapters remain in `apps/api`. Application and domain code do not depend on Prisma runtime types.
 

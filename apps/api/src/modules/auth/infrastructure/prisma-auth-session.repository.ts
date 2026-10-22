@@ -19,6 +19,7 @@ export class PrismaAuthSessionRepository implements AuthSessionRepository {
         where: {
           id: input.userId,
           status: 'ACTIVE',
+          passwordHash: input.credentialHash,
         },
         data: {
           lastLoginAt: input.authenticatedAt,

@@ -65,6 +65,7 @@ export class LoginService {
     const sessionCreated =
       await this.authSessionRepository.createForSuccessfulLogin({
         userId: user.id,
+        credentialHash: user.passwordHash,
         tokenHash: sessionToken.tokenHash,
         expiresAt,
         authenticatedAt,

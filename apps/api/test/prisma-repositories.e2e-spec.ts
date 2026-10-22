@@ -164,6 +164,7 @@ describe('Prisma repositories (PostgreSQL integration)', () => {
     await expect(
       repository.createForSuccessfulLogin({
         userId: storedUser.id,
+        credentialHash: storedUser.passwordHash,
         tokenHash,
         expiresAt,
         authenticatedAt,
@@ -241,6 +242,7 @@ describe('Prisma repositories (PostgreSQL integration)', () => {
 
     const createSession = repository.createForSuccessfulLogin({
       userId: storedUser.id,
+      credentialHash: storedUser.passwordHash,
       tokenHash,
       authenticatedAt: new Date('2026-08-25T08:00:00.000Z'),
       expiresAt: new Date('2026-08-26T08:00:00.000Z'),
@@ -316,5 +318,25 @@ describe('Prisma repositories (PostgreSQL integration)', () => {
     await expect(
       repository.findActiveByTokenHash('e'.repeat(64), now),
     ).resolves.toBeNull();
+  });
+
+  it('rejects session creation with a password hash superseded by a password change', async () => {
+    const { prisma } = getTestSchema();
+    const repository = new PrismaAuthSessionRepository(prisma);
+    const user = await prisma.user.create({
+      data: { email: 'password-race@example.com', passwordHash: 'new-hash' },
+    });
+    await expect(
+      repository.createForSuccessfulLogin({
+        userId: user.id,
+        credentialHash: 'old-hash',
+        tokenHash: '9'.repeat(64),
+        authenticatedAt: new Date(),
+        expiresAt: new Date(Date.now() + 60_000),
+      }),
+    ).resolves.toBe(false);
+    expect(await prisma.authSession.count({ where: { userId: user.id } })).toBe(
+      0,
+    );
   });
 });

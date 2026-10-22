@@ -44,6 +44,13 @@ import { WebOriginGuard } from './presentation/web-origin.guard';
     { provide: AUTH_SESSION_REPOSITORY, useClass: PrismaAuthSessionRepository },
     { provide: SESSION_TOKEN_SERVICE, useClass: NodeSessionTokenService },
   ],
+  exports: [
+    ResolveAuthSessionService,
+    SessionAuthenticationGuard,
+    WebOriginGuard,
+    ThrottlerGuard,
+    ThrottlerModule,
+  ],
 })
 export class AuthModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {

@@ -68,6 +68,11 @@ User and session schema changes follow the migration and generated-client contro
 
 ## Deferred decisions
 
+ADR 0005 resolves profile editing, password changes, invitation links and
+acceptance, and protection of super-administrator accounts for the first account
+management release. The remaining items below are deferred only to the extent
+they are not superseded by [ADR 0005](./0005-account-management-and-invitations.md).
+
 - Invitation persistence, email delivery, token acceptance, expiration, revocation, and resend behavior
 - Preventing removal or demotion of the last active super administrator and controlled account-recovery procedures
 - Password changes, password recovery, email changes, and email verification outside invitation acceptance

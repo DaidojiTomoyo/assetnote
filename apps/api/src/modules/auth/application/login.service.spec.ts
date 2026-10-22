@@ -135,6 +135,7 @@ describe('LoginService', () => {
 
     expect(createSession).toHaveBeenCalledWith({
       userId: ACTIVE_USER.id,
+      credentialHash: ACTIVE_USER.passwordHash,
       tokenHash: TOKEN_HASH,
       authenticatedAt: AUTHENTICATED_AT,
       expiresAt: EXPIRES_AT,
@@ -218,6 +219,7 @@ describe('LoginService', () => {
     expect(generateSessionToken).toHaveBeenCalledTimes(1);
     expect(createSession).toHaveBeenCalledWith({
       userId: ACTIVE_USER.id,
+      credentialHash: ACTIVE_USER.passwordHash,
       tokenHash: TOKEN_HASH,
       authenticatedAt: AUTHENTICATED_AT,
       expiresAt: EXPIRES_AT,

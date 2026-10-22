@@ -4,18 +4,24 @@ import { useEffect, useRef, useState, type ReactNode } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import Link from "next/link"
 import type { AuthSession } from "@workspace/contracts/auth"
+import type { AccountProfile } from "@workspace/contracts/accounts"
+import { getAccountsClient } from "@/lib/api/accounts-client"
+import { AccountContext } from "./account-context"
 import { getAuthClient, getAuthErrorMessage } from "@/lib/api/auth-client"
 import { WorkspaceShell } from "./workspace-shell"
 
 export function WorkspaceSession({ children }: { children: ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()
-  const section = pathname.startsWith("/wallets")
-    ? "wallets"
-    : pathname.startsWith("/market")
-      ? "market"
-      : "overview"
+  const section = pathname.startsWith("/settings")
+    ? "settings"
+    : pathname.startsWith("/wallets")
+      ? "wallets"
+      : pathname.startsWith("/market")
+        ? "market"
+        : "overview"
   const [session, setSession] = useState<AuthSession | null>(null)
+  const [profile, setProfile] = useState<AccountProfile | null>(null)
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(true)
   const [attempt, setAttempt] = useState(0)
@@ -34,6 +40,9 @@ export function WorkspaceSession({ children }: { children: ReactNode }) {
           router.replace("/login")
           return
         }
+        const account = await getAccountsClient().getProfile()
+        if (!active) return
+        setProfile(account)
         setSession(current)
         setMessage("")
         setLoading(false)
@@ -69,6 +78,7 @@ export function WorkspaceSession({ children }: { children: ReactNode }) {
     <WorkspaceShell
       section={section}
       session={session}
+      account={profile?.user}
       onLogout={logout}
       loggingOut={loggingOut}
       logoutError={session ? message : ""}
@@ -85,7 +95,7 @@ export function WorkspaceSession({ children }: { children: ReactNode }) {
           <div className="workspace-skeleton skeleton-allocation" />
           <div className="workspace-skeleton skeleton-chart" />
         </div>
-      ) : !session ? (
+      ) : !session || !profile ? (
         <section
           className="workspace-unavailable"
           aria-labelledby="session-error-title"
@@ -110,7 +120,18 @@ export function WorkspaceSession({ children }: { children: ReactNode }) {
           </div>
         </section>
       ) : (
-        children
+        <AccountContext
+          value={{
+            profile,
+            updateUser(user) {
+              setProfile((current) =>
+                current ? { ...current, user } : current
+              )
+            },
+          }}
+        >
+          {children}
+        </AccountContext>
       )}
     </WorkspaceShell>
   )

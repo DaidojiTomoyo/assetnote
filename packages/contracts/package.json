@@ -4,6 +4,10 @@
   "private": true,
   "type": "commonjs",
   "exports": {
+    "./accounts": {
+      "types": "./dist/accounts.d.ts",
+      "default": "./dist/accounts.js"
+    },
     "./auth": {
       "types": "./dist/auth.d.ts",
       "default": "./dist/auth.js"

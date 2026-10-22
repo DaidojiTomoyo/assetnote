@@ -2,11 +2,13 @@
 
 import { useId, useSyncExternalStore, type ReactNode } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useTheme } from "next-themes"
-import { ChevronDown, LogOut, X } from "lucide-react"
+import { ChevronDown, LogOut, Settings, X } from "lucide-react"
 import type { AuthRole, AuthSession } from "@workspace/contracts/auth"
+import type { Account } from "@workspace/contracts/accounts"
 
-export type WorkspaceSection = "overview" | "wallets" | "market"
+export type WorkspaceSection = "overview" | "wallets" | "market" | "settings"
 
 const navigation: { section: WorkspaceSection; label: string; href: string }[] =
   [
@@ -25,6 +27,7 @@ type WorkspaceShellProps = {
   children: ReactNode
   section: WorkspaceSection
   session?: AuthSession | null
+  account?: Account
   preview?: boolean
   loggingOut?: boolean
   logoutError?: string
@@ -47,6 +50,7 @@ export function WorkspaceShell({
   children,
   section,
   session,
+  account,
   preview = false,
   loggingOut = false,
   logoutError = "",
@@ -61,6 +65,7 @@ export function WorkspaceShell({
     getServerSnapshot
   )
   const email = preview ? "name@example.com" : session?.user.email
+  const name = account?.nickname || email
 
   function hrefFor(item: (typeof navigation)[number]) {
     return preview ? `/preview?section=${item.section}` : item.href
@@ -102,9 +107,19 @@ export function WorkspaceShell({
                 }
               >
                 <span className="workspace-avatar" aria-hidden="true">
-                  {email[0]?.toUpperCase()}
+                  {account?.avatar ? (
+                    <Image
+                      src={account.avatar}
+                      width={36}
+                      height={36}
+                      alt=""
+                      unoptimized
+                    />
+                  ) : (
+                    name?.[0]?.toUpperCase()
+                  )}
                 </span>
-                <span className="workspace-account-email">{email}</span>
+                <span className="workspace-account-email">{name}</span>
                 <ChevronDown size={14} aria-hidden="true" />
               </button>
               <div
@@ -132,6 +147,20 @@ export function WorkspaceShell({
                       ? roleLabels[session.user.role]
                       : ""}
                 </p>
+                {!preview && (
+                  <Link
+                    className="workspace-settings-link"
+                    href="/settings/profile"
+                    onClick={(event) =>
+                      event.currentTarget
+                        .closest<HTMLElement>("[popover]")
+                        ?.hidePopover()
+                    }
+                  >
+                    <Settings size={17} aria-hidden="true" />
+                    账户设置
+                  </Link>
+                )}
                 <fieldset className="workspace-theme-options">
                   <legend>外观</legend>
                   {[

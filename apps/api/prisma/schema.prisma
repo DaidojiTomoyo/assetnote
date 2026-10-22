@@ -33,10 +33,32 @@ model User {
   lastLoginAt  DateTime?  @map("last_login_at") @db.Timestamptz(3)
   createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt    DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
+  nickname     String?    @db.VarChar(40)
+  avatar       String?    @db.Text
+  version      Int        @default(0)
 
-  sessions AuthSession[]
+  sessions    AuthSession[]
+  invitations UserInvitation[]
 
   @@map("users")
+}
+
+model UserInvitation {
+  id         String    @id @default(uuid()) @db.Uuid
+  email      String    @db.VarChar(254)
+  role       UserRole
+  tokenHash  String    @unique @map("token_hash") @db.Char(64)
+  inviterId  String    @map("inviter_id") @db.Uuid
+  expiresAt  DateTime  @map("expires_at") @db.Timestamptz(3)
+  acceptedAt DateTime? @map("accepted_at") @db.Timestamptz(3)
+  revokedAt  DateTime? @map("revoked_at") @db.Timestamptz(3)
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  inviter User @relation(fields: [inviterId], references: [id], onDelete: Restrict)
+
+  @@index([email])
+  @@index([createdAt, id])
+  @@map("user_invitations")
 }
 
 model AuthSession {
