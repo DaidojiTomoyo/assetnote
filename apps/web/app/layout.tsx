@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import "@workspace/ui/globals.css"
 import "./styles.css"
+import "./workspace.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
